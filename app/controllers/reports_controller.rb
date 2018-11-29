@@ -278,8 +278,11 @@ class ReportsController < ApplicationController
   def month_selections
     months = [ ]
     month_dates = { }
-    start_date = Date.today.beginning_of_month
-    end_date = Date.today.end_of_month
+    #
+    #  this temporary change makes testing with the Grindle data set easier
+    #
+    start_date = Date.parse("November 1, 2018")  # Date.today.beginning_of_month
+    end_date = start_date.end_of_month
     (1..12).each do |index|
       monthname = Date::MONTHNAMES[start_date.month]
       months << monthname
