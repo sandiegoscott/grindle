@@ -1,0 +1,25 @@
+#box
+  #block-login.block
+    %h2{:style => "margin-bottom:20px"}
+      Login
+    .content.login
+      - form_for @user_session, :html => {:class => "form login"} do |f|
+        = f.error_messages
+        .group.wat-cf
+          .left
+            %label.label.right
+              Login
+          .right
+            = f.text_field :username
+        .group.wat-cf
+          .left
+            %label.label.right
+              Password
+          .right
+            = f.password_field :password
+        .group.navform.wat-cf
+          .right
+            %button.button{ :type => "submit" }
+              %img{ :src => "/images/icons/key.png", :alt => "Save" }
+              Login
+

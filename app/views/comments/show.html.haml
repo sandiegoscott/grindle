@@ -1,0 +1,18 @@
+- title "Comment"
+
+%p
+  %strong Inspection Form:
+  =h @comment.inspection_form_id
+%p
+  %strong Creator:
+  =h @comment.creator_id
+%p
+  %strong Info:
+  =h @comment.info
+
+%p
+  = link_to "Edit", edit_comment_path(@comment)
+  |
+  = link_to "Destroy", @comment, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", comments_path

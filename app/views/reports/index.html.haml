@@ -1,0 +1,62 @@
+- title "Reports"
+
+.block
+  .content
+    .blockhead
+      %h2= "#{@rbuilder.full_name} : Final Inspection Reports"
+    .inner
+      - form_tag('/reports/units/FinalInspection', :method => "get", :class => "form") do
+        %label.label Units
+        = select_tag :month, options_for_select(@months), :style => "margin-bottom:10px;"
+        = submit_tag("Report")
+
+      - form_tag('/reports/subdivisions/FinalInspection', :method => "get", :class => "form") do
+        %label.label Subdivisions
+        = select_tag :month, options_for_select(@months), :style => "margin-bottom:10px;"
+        = submit_tag("Report")
+
+      - form_tag('/reports/subdivisions_chart/FinalInspection', :method => "get", :class => "form") do
+        %label.label Subdivisions Chart
+        = select_tag :month, options_for_select(@months), :style => "margin-bottom:10px;"
+        = submit_tag("Report")
+
+      - form_tag('/reports/superintendent/FinalInspection', :method => "get", :class => "form") do
+        %label.label Superintendents
+        = select_tag :month, options_for_select(@months), :style => "margin-bottom:10px;"
+        = submit_tag("Report")
+
+      - form_tag('/reports/areamanager/FinalInspection', :method => "get", :class => "form") do
+        %label.label Area Managers
+        = select_tag :month, options_for_select(@months), :style => "margin-bottom:10px;"
+        = submit_tag("Report")
+
+.block
+  .content
+    .blockhead
+      %h2= "#{@rbuilder.full_name} : Frame Inspection Reports"
+    .inner
+      - form_tag('/reports/units/FrameInspection', :method => "get", :class => "form") do
+        %label.label Units
+        = select_tag :month, options_for_select(@months), :style => "margin-bottom:10px;"
+        = submit_tag("Report")
+
+      - form_tag('/reports/subdivisions/FrameInspection', :method => "get", :class => "form") do
+        %label.label Subdivisions
+        = select_tag :month, options_for_select(@months), :style => "margin-bottom:10px;"
+        = submit_tag("Report")
+
+      - form_tag('/reports/subdivisions_chart/FrameInspection', :method => "get", :class => "form") do
+        %label.label Subdivisions Chart
+        = select_tag :month, options_for_select(@months), :style => "margin-bottom:10px;"
+        = submit_tag("Report")
+
+      - form_tag('/reports/superintendent/FrameInspection', :method => "get", :class => "form") do
+        %label.label Superintendents
+        = select_tag :month, options_for_select(@months), :style => "margin-bottom:10px;"
+        = submit_tag("Report")
+
+      - form_tag('/reports/areamanager/FrameInspection', :method => "get", :class => "form") do
+        %label.label Area Managers
+        = select_tag :month, options_for_select(@months), :style => "margin-bottom:10px;"
+        = submit_tag("Report")
+

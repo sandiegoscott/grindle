@@ -1,0 +1,130 @@
+- title "Frame Inspection"
+
+.block
+  .content
+    .blockhead
+      %h2.side=h @title
+      %h4.side
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        = link_to "Edit", edit_frame_inspection_path(@frame_inspection)
+        |
+        = link_to "Delete", @frame_inspection, :method => :delete, :confirm => "Are you sure?"
+        |
+        = link_to "Print", frame_inspection_path(@frame_inspection, :format => :pdf)
+    .inner
+      #site_information
+        %table.table
+          %thead
+            %tr
+              %th Site Information
+              %th
+              %th
+          %tbody
+            %tr
+              %td{:style => "padding-top:10px;"}
+                %strong Job #:
+                =h @frame_inspection.jobnumber
+              %td
+                %strong Date:
+                = @frame_inspection.idate
+            %tr
+              %td
+                %strong Address:
+                =h @frame_inspection.address
+              %td
+                %strong Subdivision:
+                =h @frame_inspection.subdivision.name
+            %tr
+              %td
+                %strong City:
+                =h @frame_inspection.city
+              %td
+                %strong Area Manager:
+                =h @frame_inspection.areamanager.full_name
+              %td
+                %strong Inspector:
+                =h @frame_inspection.inspector.full_name
+            %tr
+              %td
+                %strong State:
+                =h @frame_inspection.state
+              %td
+                %strong Superintendent:
+                =h @frame_inspection.superintendent.full_name
+              %td
+                %strong Status:
+                =h @frame_inspection.status
+
+      #check_list
+        %table.table
+          %thead
+            %tr
+              %th{:style => "width:20%;"}
+                Check List
+              %th
+          %tbody
+            %tr
+              %td
+                %strong Passed:
+              %td
+                = @frame_inspection.passed? ? 'Yes' : 'No'
+            %tr
+              %td
+                %strong Reinspection Required:
+              %td
+                = @frame_inspection.rinpreq? ? 'Yes' : 'No'
+            %tr
+              %td
+                %strong Correct & Proceed:
+              %td
+                = @frame_inspection.corpro? ? 'Yes' : 'No'
+            %tr
+              %td
+                %strong Ok to sheet rock:
+              %td
+                = @frame_inspection.otsr? ? 'Yes' : 'No'
+            %tr
+              %td
+                %strong Ok to insulate:
+              %td
+                = @frame_inspection.oti? ? 'Yes' : 'No'
+            %tr
+              %td
+                %strong Ok to brick:
+              %td
+                = @frame_inspection.otb? ? 'Yes' : 'No'
+
+      #defects
+        %table.table
+          %thead
+            %tr
+              %th{:style => "width:20%;"} Trade
+              %th Defect
+          %tbody
+            - @frame_inspection.defects.group_by(&:category).each do |cat,df|
+              -df.each do |d|
+                %tr
+                  %td
+                    %strong
+                      = d.category.name + ':'
+                  %td
+                    =h d.name
+
+      #comments
+        %table.table
+          %thead
+            %tr
+              %th{:style => "width:20%;"} Comments
+              %th
+          %tbody
+            - @frame_inspection.comments.each_with_index do |com, index|
+              %tr
+                %td
+                  %strong #{index+1}
+                %td
+                  =h com.info
+%br
+PDF Report at this URL:
+%br
+= "#{root_url}reports/pdf/#{@frame_inspection.slug}.pdf"
+

@@ -1,0 +1,12 @@
+- title "Inspection Form"
+
+%p
+  %strong Name:
+  =h @inspection_form.name
+
+%p
+  = link_to "Edit", edit_inspection_form_path(@inspection_form)
+  |
+  = link_to "Destroy", @inspection_form, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", inspection_forms_path

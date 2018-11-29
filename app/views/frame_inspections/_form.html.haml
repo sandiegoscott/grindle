@@ -1,0 +1,130 @@
+.block
+  .content
+    .blockhead
+      %h2= @title
+    .inner
+      - form_for @frame_inspection do |f|
+        = f.error_messages
+        #site_information
+          %table.table
+            %thead
+              %tr
+                %th Site Information
+                %th
+                %th
+            %tbody
+              %tr
+                %td
+                  = f.label "Job #:"
+                  %br
+                  = f.text_field :jobnumber
+                %td
+                  = f.label "Date:"
+                  %br
+                  = f.date_select :idate
+              %tr
+                %td{ :style => "padding-top:5px;"}
+                  = f.label "Address:"
+                  %br
+                  = f.text_field :address
+                %td
+                  = f.label "Subdivision:"
+                  %br
+                  = f.select :subdivision_id, @subs.map{ |sd| [sd.name, sd.id]}
+                %td
+                  - if params[:action].include? 'new'
+                    = link_to "Show All Subdivisions", new_all_subs_frame_inspections_path
+              %tr
+                %td
+                  = f.label "City:"
+                  %br
+                  = f.text_field :city
+                %td
+                  = f.label "Area Manager:"
+                  %br
+                  = f.select :areamanger_id, @ams.map{ |a| [a.full_name, a.id]}
+                %td
+                  = f.label "Status:"
+                  %br
+                  = f.select :status, (["Pending","Incomplete","Complete"])
+              %tr
+                %td
+                  = f.label "State:"
+                  %br
+                  = f.select :state, get_states
+                %td
+                  = f.label "Superintendent:"
+                  %br
+                  = f.select :superintendent_id, @supers.map{ |s| [s.full_name, s.id]}
+                %td
+                  = f.label "Inspector:"
+                  %br
+                  = f.select :inspector_id, @inspectors.map{ |i| [i.full_name, i.id]}
+
+        #check_list
+          %table.table
+            %thead
+              %tr
+                %th{:style => "width:20%;"}
+                  Check List
+                %th
+            %tbody
+              %tr
+                %td
+                  Passed:
+                %td
+                  = f.check_box :passed
+              %tr
+                %td
+                  Reinspection required:
+                %td
+                  = f.check_box :rinpreq
+              %tr
+                %td
+                  Correct & Proceed:
+                %td
+                  = f.check_box :corpro
+              %tr
+                %td
+                  Ok to sheet rock:
+                %td
+                  = f.check_box :otsr
+              %tr
+                %td
+                  Ok to insulate:
+                %td
+                  = f.check_box :oti
+              %tr
+                %td
+                  Ok to brick:
+                %td
+                  = f.check_box :otb
+
+        #defects
+          %table.table
+            %thead
+              %tr
+                %th{:style => "width:10%;"} Trade
+                %th Defect
+          - f.fields_for :defects do |defect_form|
+            = render :partial => 'defect', :locals => { :f => defect_form }
+          = new_child_fields_template(f, :defects)
+          %p
+            = add_child_link "New Defect", :defects
+
+        #comments
+          %table.table
+            %thead
+              %tr
+                %th{:style => "width:10%;"} Comments
+                %th
+          - f.fields_for :comments do |comment_form|
+            = render :partial => 'comment', :locals => { :f => comment_form }
+          = new_child_fields_template(f, :comments)
+          %p
+            = add_child_link "New Comment", :comments
+
+        .clear
+        %p
+          = f.submit "Submit"
+

@@ -1,0 +1,18 @@
+- title "Defect"
+
+%p
+  %strong Inspection Form:
+  =h @defect.inspection_form_id
+%p
+  %strong Name:
+  =h @defect.name
+%p
+  %strong Category:
+  =h @defect.category_id
+
+%p
+  = link_to "Edit", edit_defect_path(@defect)
+  |
+  = link_to "Destroy", @defect, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", defects_path

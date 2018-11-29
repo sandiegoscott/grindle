@@ -1,0 +1,20 @@
+- form_for @category do |f|
+  = f.error_messages
+  %table.table
+    %thead
+      %tr
+        %th{:style => "width:25%;"} Description
+        %th{:style => "width:10%;"} Abbreviation
+        %th{:style => "width:10%;"} Category Type
+        %th
+    %tbody
+      %tr
+        %td
+          = f.text_field :name
+        %td
+          = f.text_field :abbrev, :style => "width:80px;"
+        %td
+          = f.text_field :ctype, :style => "width:80px;"
+        %td
+          = f.submit "Submit"
+

@@ -1,0 +1,32 @@
+- form_for @rbuilder do |f|
+  = f.error_messages
+  %table.table
+    %thead
+      %tr
+        %th{:style => "width:12%;"} Username
+        %th{:style => "width:12%;"} First Name
+        %th{:style => "width:12%;"} Last Name
+        %th{:style => "width:24%;"} Email
+        %th{:style => "width:15%;"} Password
+        %th{:style => "width:15%;"} Password Confirm
+        %th Inactive?
+    %tbody
+      %tr
+        %td= f.text_field :username, :style => "width:100px;"
+        %td= f.text_field :first_name, :style => "width:100px;"
+        %td= f.text_field :last_name, :style => "width:100px;"
+        %td= f.text_field :email, :style => "width:200px;"
+        %td= f.password_field :password, :style => "width:120px;"
+        %td= f.password_field :password_confirmation, :style => "width:120px;"
+        %td= f.check_box :inactive, :style => "width:40px;"
+      %tr
+        %td
+        %td
+        %td Default City:
+        %td= f.text_field :default_city, :style => "width:200px;"
+        %td
+          - if params[:action].include? 'edit'
+            Leave blank to leave password unchanged
+        %td
+        %td= f.submit "Submit"
+

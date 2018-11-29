@@ -1,0 +1,33 @@
+- title "Builders"
+
+.block
+  .secondary-navigation
+    = render :partial => 'shared/admin_nav'
+  .content
+    .blockhead
+      %h2.side Builders :
+      %h4.side
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        - if show_settings?
+          = link_to "New Builder", new_rbuilder_path
+    .inner
+      %table.table
+        %thead
+          %tr
+            %th Username
+            %th Name
+            %th Email
+            %th Logins
+            %th Options
+        %tbody
+          - for rbuilder in @rbuilders
+            %tr
+              %td= h rbuilder.username
+              %td= h rbuilder.full_name
+              %td= h rbuilder.email
+              %td= h rbuilder.login_count
+              %td
+                = link_to 'Edit', edit_rbuilder_path(rbuilder)
+                |
+                = link_to 'Destroy', rbuilder, :confirm => 'Are you sure?', :method => :delete
+

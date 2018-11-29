@@ -1,0 +1,51 @@
+- title "Superintendent"
+
+%p
+  %strong Username:
+  =h @superintendent.username
+%p
+  %strong First Name:
+  =h @superintendent.first_name
+%p
+  %strong Last Name:
+  =h @superintendent.last_name
+%p
+  %strong Email:
+  =h @superintendent.email
+%p
+  %strong Crypted Password:
+  =h @superintendent.crypted_password
+%p
+  %strong Password Salt:
+  =h @superintendent.password_salt
+%p
+  %strong Type:
+  =h @superintendent.type
+%p
+  %strong Inactive:
+  =h @superintendent.inactive
+%p
+  %strong Persistence Token:
+  =h @superintendent.persistence_token
+%p
+  %strong Login Count:
+  =h @superintendent.login_count
+%p
+  %strong Failed Login Count:
+  =h @superintendent.failed_login_count
+%p
+  %strong Last Login At:
+  =h @superintendent.last_login_at
+%p
+  %strong Current Login At:
+  =h @superintendent.current_login_at
+%p
+  %strong Builder:
+  =h @superintendent.builder_id
+
+%p
+  = link_to "Edit", edit_superintendent_path(@superintendent)
+  |
+  = link_to "Destroy", @superintendent, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", superintendents_path

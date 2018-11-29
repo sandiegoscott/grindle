@@ -1,0 +1,21 @@
+- title "Defects"
+
+%table.datatable{:cellpadding => 0, :cellspacing => 0}
+  %thead
+    %tr
+      %th Inspection form
+      %th Name
+      %th Category
+      %th Options
+  %tbody
+    - for defect in @defects
+      %tr{:class => cycle('odd', 'even')} 
+        %td= h defect.inspection_form_id
+        %td= h defect.name
+        %td= h defect.category_id
+        %td
+          = link_to 'Show', defect
+          = link_to 'Edit', edit_defect_path(defect)
+          = link_to 'Destroy', defect, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Defect", new_defect_path

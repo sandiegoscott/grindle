@@ -1,0 +1,19 @@
+- title "Overview"
+
+- if show_settings?
+  .block
+    .content
+      .blockhead
+        %h2 Admin
+      - @builders = Rbuilder.find(:all, :order => "username asc")
+      .inner
+        %h3
+          =h @builders.length
+          Builders
+        %ul.navigation
+          - for builder in @builders
+            %li
+              %a{ :href => rbuilder_path(builder) }
+                = builder.full_name
+                .clear
+

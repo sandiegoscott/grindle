@@ -1,0 +1,22 @@
+- title "Reports: Current month by unit"
+
+%table{:cellspacing => 0, :cellpadding => 0}
+  %thead
+    %tr
+      %th Ranking
+      %th Name
+      %th Average Defects
+  %tbody
+  - @iforms.group_by(&:superintendent).each do |si,i|
+    %tr{:class => cycle('odd', 'even')} 
+      %td
+      %td=h si.name 
+      %td=h c.jobnumber
+      - c.defects.group_by(&:category).each do |category,defects|
+        %td
+          %b
+            = category.abbrev + ":"
+          = defects.length
+          
+= link_to "Back", :back
+          

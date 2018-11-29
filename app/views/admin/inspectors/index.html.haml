@@ -1,0 +1,35 @@
+- title "Inspectors"
+
+.block
+  .secondary-navigation
+    = render :partial => 'shared/admin_nav'
+  .content
+    .blockhead
+      %h2.side Inspectors :
+      %h4.side
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        - if current_user.is_admin?
+          = link_to "New Inspector", new_inspector_path
+    .inner
+      %table.table
+        %thead
+          %tr
+            %th Username
+            %th Name
+            %th Email
+            %th Inactive
+            %th Logins
+            %th Options
+        %tbody
+          - for inspector in @inspectors
+            %tr
+              %td= h inspector.username
+              %td= h inspector.full_name
+              %td= h inspector.email
+              %td= h inspector.inactive
+              %td= h inspector.login_count
+              %td
+                = link_to 'Edit', edit_inspector_path(inspector)
+                |
+                = link_to 'Destroy', inspector, :confirm => 'Are you sure?', :method => :delete
+

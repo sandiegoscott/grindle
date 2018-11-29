@@ -1,0 +1,8 @@
+- title "Edit Inspection Form"
+
+= render :partial => 'form'
+
+%p
+  = link_to "Edit", edit_inspection_form_path(@inspection_form)
+  |
+  = link_to "View All", inspection_forms_path

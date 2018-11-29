@@ -1,0 +1,20 @@
+%ul.wat-cf
+  %li{ :class => controller.controller_path.include?('inspectors') ? 'active' : '' }
+    %a{ :href => inspectors_path }
+      Inspectors
+  %li{ :class => controller.controller_path.include?('rbuilders') ? 'active' : '' }
+    %a{ :href => rbuilders_path }
+      Builders
+  %li{ :class => controller.controller_path.include?('superintendents') ? 'active' : '' }
+    %a{ :href => superintendents_path }
+      Superintendents
+  %li{ :class => controller.controller_path.include?('areamanagers') ? 'active' : '' }
+    %a{ :href => areamanagers_path }
+      Area Managers
+  %li{ :class => controller.controller_path.include?('subdivisions') ? 'active' : '' }
+    %a{ :href => subdivisions_path }
+      Subdivisions
+  %li{ :class => controller.controller_path.include?('categories') ? 'active' : '' }
+    %a{ :href => categories_path }
+      Categories
+

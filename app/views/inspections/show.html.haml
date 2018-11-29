@@ -1,0 +1,12 @@
+- title "Inspections"
+
+%p
+  %strong Name:
+  =h @inspections.name
+
+%p
+  = link_to "Edit", edit_inspections_path(@inspections)
+  |
+  = link_to "Destroy", @inspections, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", inspections_path

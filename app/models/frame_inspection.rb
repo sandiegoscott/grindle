@@ -1,0 +1,2 @@
+class FrameInspection < InspectionForm
+end

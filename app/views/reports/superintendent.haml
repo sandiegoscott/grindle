@@ -1,0 +1,25 @@
+- title @title
+- subtitle @subtitle
+
+.block
+  .content
+    .blockhead
+      %h2=h @title
+    .inner
+      %table.table{:cellspacing => 0, :cellpadding => 0}
+        %thead
+          %tr
+            %th.first{:style => "width:160px;"} Name
+            %th Average Inspection Defects
+            %th
+              = "Number of #{@type} Inspections"
+            %th
+              = "Number of #{@type} Defects"
+        %tbody
+          - @table.each do |row|
+            %tr
+              %td.first=h row[0]
+              %td=h row[1]
+              %td=h row[2]
+              %td=h row[3]
+

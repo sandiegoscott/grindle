@@ -1,0 +1,95 @@
+- form_for @inspection_form do |f|
+  = f.error_messages
+  %fieldset
+    %legend Site Information
+    %table{:cellspacing => 0, :cellpadding => 0}
+      %tr
+        %td
+          = f.label "Job #:"
+          %br
+          = f.text_field :jobnumber
+        %td
+          = f.label "Date:"
+          %br
+          = f.date_select :idate
+        %td
+          = f.label "Status:"
+          %br
+          = f.select :rbuilder, (["Pending","Incomplete","Complete"])
+      %tr
+        %td
+          = f.label "Adress:"
+          %br
+          = f.text_field :address
+        %td
+          = f.label "City:"
+          %br
+          = f.text_field :city
+        %td
+          = f.label "State:"
+          %br
+          = f.select :state, get_states
+      %tr
+        %td
+          = f.label "Zip:"
+          %br
+          = f.text_field :zip
+        %td
+          = f.label "Subdivision:"
+          %br
+          = f.select :subdivision_id, @subs.map{ |sd| [sd.name, sd.id]}
+        %td
+          = f.label "Superintendent:"
+          %br
+          = f.select :superintendent_id, @supers.map{ |s| [s.full_name, s.id]}
+      %tr
+        %td
+          = f.label "Area Manager:"
+          %br
+          = f.select :areamanger_id, @ams.map{ |a| [a.full_name, a.id]}
+        %td
+          = f.label "Inspector:"
+          %br
+          = f.select :inspector_id, @inspectors.map{ |i| [i.full_name, i.id]}
+      
+  %fieldset
+    %legend Check List
+    .required
+      %label
+        Passed:
+        = f.check_box :passed
+    .required
+      %label
+        Reinspection required:
+        = f.check_box :rinpreq
+    .required
+      %label
+        Correct & Proceed:
+        = f.check_box :corpro
+    .required
+      %label
+        Ok to sheet rock:
+        = f.check_box :otsr
+    .required
+      %label
+        Ok to insulate:
+        = f.check_box :oti
+    .required
+      %label
+        Ok to brick:
+        = f.check_box :otb
+  %fieldset
+    %legend Defects
+    - f.fields_for :defects do |df|
+      .defect_required
+        %label
+          = df.select(:category_id, Category.find(:all, :order => 'abbrev').collect { |c| [c.abbrev, c.id]}, :size => "1")
+        %br
+        = df.text_area :name, :size => "21x5"
+
+        - unless df.object.new_record? 
+          .delete
+            = df.check_box '_delete'
+            = df.label '_delete', 'Remove'
+  %p
+    = f.submit "Submit"

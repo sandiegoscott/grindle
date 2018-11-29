@@ -1,0 +1,27 @@
+- title @title
+- subtitle @subtitle
+
+.block
+  .content
+    .blockhead
+      %h2= @title
+    .inner
+      - ncols, first_col = 9, 1
+      - loop do
+        %table.table{:cellspacing => 0, :cellpadding => 0}
+          %tr
+            %th{:style => "width:19%;"}
+              = @headings[0]
+            - for col in first_col..first_col+ncols-1
+              %th{:style => "width:9%;"}
+                = (col >= @headings.size) ? "&nbsp;" : @headings[col]
+          - @table.each do |row|
+            %tr
+              %td{:class => "first"}
+                = row[0]
+              - for col in first_col..first_col+ncols-1
+                %td
+                  = (col >= row.size) ? "&nbsp;" : row[col]
+        - first_col = first_col + ncols
+        - break if first_col >= @headings.size
+

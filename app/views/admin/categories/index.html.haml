@@ -1,0 +1,31 @@
+- title "Categories"
+
+.block
+  .secondary-navigation
+    = render :partial => 'shared/admin_nav'
+  .content
+    .blockhead
+      %h2.side Categories :
+      %h4.side
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        - if show_settings?
+          = link_to "New Category", new_category_path
+    .inner
+      %table.table
+        %thead
+          %tr
+            %th{:style => "width:25%;"} Name
+            %th{:style => "width:10%;"} Abbrev
+            %th{:style => "width:10%;"} Ctype
+            %th Options
+        %tbody
+          - for category in @categories
+            %tr{:class => cycle('odd', 'even')}
+              %td= h category.name
+              %td= h category.abbrev
+              %td= h category.ctype
+              %td
+                = link_to 'Edit', edit_category_path(category)
+                |
+                = link_to 'Destroy', category, :confirm => 'Are you sure?', :method => :delete
+

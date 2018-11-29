@@ -1,0 +1,41 @@
+!!! Strict
+%html{ :lang => "en", :xmlns => "http://www.w3.org/1999/xhtml" }
+  %head
+    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
+    %title
+      Grindle Inspections
+    = stylesheet_link_tag 'base', 'web_app_theme', 'web_app_theme_override', 'themes/bec-green/style', :media => 'all', :cache => true
+    = javascript_include_tag 'jquery-1.4.1.js','application.js'
+
+  %body
+    #container
+      #header
+        %h1
+          %a{ :href => "/" }
+            Grindle Inspections
+        - if current_user
+          #user-navigation
+            %ul
+              %li
+                %a.logout{ :href => "#" }
+                  = "Logged in as #{current_user.full_name} - #{current_user.roles.first.name.capitalize}"
+              %li
+                %a.logout{ :href => logout_path }
+                  Logout
+          #main-navigation
+            = render :partial => 'layouts/main_nav'
+      #wrapper
+        .flash
+          - flash.each do |type, message|
+            %div{ :class => "message #{type}" }
+              %p
+                = message
+        #main
+          = yield
+          #footer
+            .block
+              %p
+                Copyright &copy;
+                = Time.now.year
+                Charles Grindle.
+

@@ -1,0 +1,127 @@
+- title @title
+
+.block
+  .content
+    .blockhead
+      %h2.side=h @title
+      %h4.side
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        - if current_user.is_admin? || current_user.is_inspector?
+          = link_to "Edit", edit_final_inspection_path(@final_inspection)
+          |
+          = link_to "Delete", @final_inspection, :method => :delete, :confirm => "Are you sure?"
+          |
+        = link_to "Print", final_inspection_path(@final_inspection, :format => :pdf)
+    .inner{:style => "clear:both;"}
+      #site_information
+        %table.table
+          %thead
+            %tr
+              %th{:style => "width:40%;"} Customer Information
+              %th{:style => "width:30%;"}
+              %th
+          %tbody
+            %tr
+              %td{:style => "padding-top:10px;"}
+                %strong Date:
+                = @final_inspection.idate.to_date
+              %td{:style => "padding-top:10px;"}
+                %strong Subdivision:
+                =h @final_inspection.subdivision.name
+              %td
+                %strong Job #:
+                =h @final_inspection.jobnumber
+                = "&nbsp;"*10
+                %strong Status:
+                =h @final_inspection.status
+            %tr
+              %td
+                %strong Customer Name:
+                =h @final_inspection.name
+              %td
+                %strong Address:
+                =h @final_inspection.address
+              %td
+                %strong City:
+                =h @final_inspection.city
+                &nbsp;&nbsp;
+                %strong State:
+                =h @final_inspection.state
+            - if @final_inspection.is_drhorton?
+              %tr
+                %td
+                  %strong Telephone:
+                  =h @final_inspection.phone
+                %td
+                  %strong His Phone:
+                  =h @final_inspection.his_phone
+                %td
+                  %strong Her Phone:
+                  =h @final_inspection.her_phone
+            %tr
+              %td
+                %strong Area Manager:
+                =h @final_inspection.areamanager.full_name
+              %td
+                %strong Superintendent:
+                =h @final_inspection.superintendent.full_name
+              %td
+                %strong Inspector:
+                =h @final_inspection.inspector.full_name
+
+      - if @final_inspection.is_drhorton?
+        #check_list
+          %table.table
+            %thead
+              %tr
+                %th{:colspan => 2}
+                  Check List
+            %tbody
+              - FinalInspection::CHECKS.each_pair do |key, value|
+                %tr
+                  %td{:style => "width:3%;"}= @final_inspection.send(key.to_s) ? 'X' : ''
+                  %td= FinalInspection::LETTERS[key] + '. ' + value
+      - else
+        = render :partial => 'show_checklist'
+
+      #defects
+        %table.table
+          %thead
+            %tr
+              - if @final_inspection.is_drhorton?
+                %th Subcontractor
+                %th Status
+                %th Item
+              -else
+                %th{:style => "width:25%;"} Trade
+                %th Defect
+          %tbody
+            - @final_inspection.defects.each do |defect|
+              %tr
+                %td{:style => "width:25%;"}
+                  %strong= defect.category.name
+                - if @final_inspection.is_drhorton?
+                  %td{:style => "width:12%;"}= defect.status
+                %td= defect.name
+
+      - unless @final_inspection.is_drhorton?
+        #comments
+          %table.table
+            %thead
+              %tr
+                %th{:style => "width:20%;"} Comments
+                %th
+            %tbody
+              - @final_inspection.comments.each_with_index do |com, index|
+                %tr
+                  %td
+                    %strong #{index+1}
+                  %td
+                    =h com.info
+
+%br
+PDF Report at this URL:
+%br
+- Rails.logger.info ">>>>> root_url=#{root_url}"
+= "#{root_url}reports/pdf/#{@final_inspection.slug}.pdf"
+

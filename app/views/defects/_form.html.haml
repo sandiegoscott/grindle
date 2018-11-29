@@ -1,0 +1,16 @@
+- form_for @defect do |f|
+  = f.error_messages
+  %p
+    = f.label :inspection_form_id
+    %br
+    = f.text_field :inspection_form_id
+  %p
+    = f.label :name
+    %br
+    = f.text_field :name
+  %p
+    = f.label :category_id
+    %br
+    = f.text_field :category_id
+  %p
+    = f.submit "Submit"

@@ -1,0 +1,13 @@
+- title "#{@rbuilder.full_name}: Edit Frame Inspection"
+
+= render :partial => 'form'
+
+%br
+PDF Report at this URL:
+%br
+= "#{root_url}reports/pdf/#{@frame_inspection.slug}.pdf"
+
+%br
+%br
+= link_to "Back", :back
+

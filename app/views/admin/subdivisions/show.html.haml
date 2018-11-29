@@ -1,0 +1,12 @@
+- title "Subdivisions"
+
+%p
+  %strong Name:
+  =h @subdivision.name
+
+%p
+  = link_to "Edit", edit_subdivision_path(@subdivision)
+  |
+  = link_to "Destroy", @subdivision, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", subdivisions_path

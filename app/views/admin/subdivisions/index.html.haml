@@ -1,0 +1,27 @@
+- title "Subdivisions"
+
+.block
+  .secondary-navigation
+    = render :partial => 'shared/admin_nav'
+  .content
+    .blockhead
+      %h2.side Subdivisions :
+      %h4.side
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        - if show_settings?
+          = link_to "New Subdivision", new_subdivision_path
+    .inner
+      %table.table
+        %thead
+          %tr
+            %th{:style => "width:25%;"} Name
+            %th Options
+        %tbody
+          - for subdivision in @subdivisions
+            %tr
+              %td= h subdivision.name
+              %td
+                = link_to 'Edit', edit_subdivision_path(subdivision)
+                |
+                = link_to 'Destroy', subdivision, :confirm => 'Are you sure?', :method => :delete
+

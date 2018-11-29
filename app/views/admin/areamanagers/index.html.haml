@@ -1,0 +1,37 @@
+- title "Area Managers"
+
+.block
+  .secondary-navigation
+    = render :partial => 'shared/admin_nav'
+  .content
+    .blockhead
+      %h2.side Area Managers :
+      %h4.side
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        - if show_settings?
+          = link_to "New Area Manager", new_areamanager_path
+    .inner
+      %table.table
+        %thead
+          %tr
+            %th Username
+            %th Name
+            %th Email
+            %th Inactive
+            %th Builder
+            %th Logins
+            %th Options
+        %tbody
+          - for areamanager in @areamanagers
+            %tr{:class => cycle('odd', 'even')}
+              %td= h areamanager.username
+              %td= h areamanager.full_name
+              %td= h areamanager.email
+              %td= h areamanager.inactive
+              %td= h areamanager.rbuilder ? areamanager.rbuilder.full_name : '--'
+              %td= h areamanager.login_count
+              %td
+                = link_to 'Edit', edit_areamanager_path(areamanager)
+                |
+                = link_to 'Destroy', areamanager, :confirm => 'Are you sure?', :method => :delete
+

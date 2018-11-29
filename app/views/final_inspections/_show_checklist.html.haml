@@ -1,0 +1,66 @@
+#check_list
+  %table.table
+    %thead
+      %tr
+        %th{:style => "width:20%;"}
+          Check List
+        %th
+    %tbody
+      %tr
+        %td
+          Passed:
+        %td
+          = @final_inspection.passed? ? 'Yes' : 'No'
+      %tr
+        %td
+          %strong Reinspection Required:
+        %td
+          = @final_inspection.rinpreq? ? 'Yes' : 'No'
+      %tr
+        %td
+          %strong Correct & Proceed:
+        %td
+          = @final_inspection.corpro? ? 'Yes' : 'No'
+      %tr
+        %td
+          %strong House Clean:
+        %td
+          = @final_inspection.houseclean? ? 'Yes' : 'No'
+      %tr
+        %td
+          %strong Electric Meter:
+        %td
+          = @final_inspection.elcmeter? ? 'Yes' : 'No'
+      %tr
+        %td
+          %strong Gas Meter:
+        %td
+          = @final_inspection.gasmeter? ? 'Yes' : 'No'
+      %tr
+        %td
+          %strong Appliances:
+        %td
+          = @final_inspection.appliances? ? 'Yes' : 'No'
+
+  %table.table
+    %thead
+      %tr
+        %th{:style => "width:20%;"}
+          Final Grade
+        %th
+    %tbody
+      %tr
+        %td
+          %strong Passed:
+        %td
+          = @final_inspection.fgpass? ? 'Yes' : 'No'
+      %tr
+        %td
+          %strong Correct & Proceed
+        %td
+          = @final_inspection.fgcap? ? 'Yes' : 'No'
+      %tr
+        %td
+          %strong Call for Reinspection
+        %td
+          = @final_inspection.fgcfr? ? 'Yes' : 'No'

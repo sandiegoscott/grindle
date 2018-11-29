@@ -1,0 +1,19 @@
+%ul
+  %li{ :class => controller.controller_path == 'overview' ? 'active' : '' }
+    %a{ :href => overview_index_path }
+      Home
+  - if @rbuilder
+    %li{ :class => controller.controller_path == 'final_inspections' ? 'active' : '' }
+      %a{ :href => final_inspections_path }
+        Final Inspections
+    %li{ :class => controller.controller_path == 'frame_inspections' ? 'active' : '' }
+      %a{ :href => frame_inspections_path }
+        Frame Inspections
+    %li{ :class => controller.controller_path == 'reports' ? 'active' : '' }
+      %a{ :href => reports_path }
+        Reports
+  - if current_user && current_user.is_admin?
+    %li{ :style => "margin-left:30px;", :class => controller.controller_path.include?('admin') ? 'active' : '' }
+      %a{ :href => inspectors_path }
+        Admin
+  .clear

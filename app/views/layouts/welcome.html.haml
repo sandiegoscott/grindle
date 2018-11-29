@@ -1,0 +1,27 @@
+%html{ :lang => "en", :xmlns => "http://www.w3.org/1999/xhtml" }
+  %head
+    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
+    %title
+      Grindle Inspections
+    = stylesheet_link_tag "web_app_theme", "web_app_theme_override", "themes/bec-green/style", :cache => true
+  %body
+    #container
+      #header
+        %h1
+          %a{ :href => "/" }
+            Grindle Inspections
+      #wrapper
+        .flash
+          - flash.each do |type, message|
+            %div{ :class => "message #{type}" }
+              %p
+                = message
+        #main
+          = yield
+          #footer
+            .block
+              %p
+                Copyright &copy;
+                = Time.now.year
+                Charles Grindle.
+

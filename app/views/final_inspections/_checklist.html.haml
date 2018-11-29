@@ -1,0 +1,66 @@
+#check_list
+  %table.table
+    %thead
+      %tr
+        %th{:style => "width:20%;"}
+          Check List
+        %th
+    %tbody
+      %tr
+        %td
+          Passed:
+        %td
+          = f.check_box :passed
+      %tr
+        %td
+          Reinspection required:
+        %td
+          = f.check_box :rinpreq
+      %tr
+        %td
+          Correct & Proceed:
+        %td
+          = f.check_box :corpro
+      %tr
+        %td
+          House Clean:
+        %td
+          = f.check_box :houseclean
+      %tr
+        %td
+          Electric Meter:
+        %td
+          = f.check_box :elcmeter
+      %tr
+        %td
+          Gas Meter:
+        %td
+          = f.check_box :gasmeter
+      %tr
+        %td
+          Appliances:
+        %td
+          = f.check_box :appliances
+
+%table.table
+  %thead
+    %tr
+      %th{:style => "width:20%;"}
+        Final Grade
+      %th
+  %tbody
+    %tr
+      %td
+        Passed:
+      %td
+        = f.check_box :fgpass
+    %tr
+      %td
+        Correct & Proceed
+      %td
+        = f.check_box :fgcap
+    %tr
+      %td
+        Call for Reinspection
+      %td
+        = f.check_box :fgcfr

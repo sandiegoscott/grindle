@@ -1,0 +1,12 @@
+- form_for @item do |f|
+  = f.error_messages
+  %p
+    = f.label :punchlist_id
+    %br
+    = f.text_field :punchlist_id
+  %p
+    = f.label :description
+    %br
+    = f.text_field :description
+  %p
+    = f.submit "Submit"

@@ -1,0 +1,30 @@
+- title @title
+- subtitle @subtitle
+
+.block
+  .content
+    .blockhead
+      %h2=h @title
+    .inner
+      - @superintendents.each do |superintendent|
+        %h3
+          = superintendent.full_name
+        %table.table{:cellspacing => 0, :cellpadding => 0}
+          %thead
+            %tr
+              %th{:style => "width:20%;"} Address
+              %th{:style => "width:14%;"} Subdivision
+              %th{:style => "width:10%;"} Job #
+              %th{:style => "width:6%;"} Total
+              %th Defects
+          %tbody
+            - @inspections_from_superintendent_ids[superintendent.id].each do |i|
+              %tr
+                %td=h i.address
+                %td=h i.subdivision.name
+                %td=h i.jobnumber
+                %td= i.defects.size
+                %td
+                  - i.defects.group_by(&:category).each do |category, defects|
+                    = category.name + ": " + defects.length.to_s + "&nbsp;&nbsp;"
+

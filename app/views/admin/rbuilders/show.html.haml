@@ -1,0 +1,103 @@
+- title "You are working with #{@rbuilder.full_name}"
+
+#tabs
+  %ul
+    %li
+      %a{:title => "Final Inspections", :href => "#final_inspection_table"} Final Inspections
+    %li
+      %a{:title => "Frame Inspections", :href => "#frame_inspection_table"} Frame Inspections
+    %li
+      %a{:title => "Superintendents", :href => "#superintendents_table"} Superintendents
+    %li
+      %a{:title => "Area Managers", :href => "#am_table"} Area Managers
+  #final_inspection_table
+    - if show_settings?
+      = link_to "Create Final Inspection", new_rbuilder_final_inspection_url(@rbuilder)
+    %table.datatable{:cellpadding => 0, :border => 0, :cellspacing => 0}
+      %thead
+        %tr
+          %th Jobnumber
+          %th Address
+          %th Superintendent
+          %th Area Manager
+          %th Options
+      %tbody
+        - for fni in @fninspections
+          %tr{:class => cycle('odd', 'even')}
+            %td= h(fni.jobnumber)
+            %td= h(fni.address)
+            %td= h(fni.superintendent.full_name)
+            %td= h(fni.areamanager.full_name)
+            %td
+              = link_to "Edit", edit_rbuilder_final_inspection_url(@rbuilder, fni)
+              |
+              = link_to "Delete", [@rbuilder, fni], :method => :delete, :confirm => "Are you sure?"
+              |
+              = link_to "Print", rbuilder_final_inspection_path(@rbuilder, fni, :format => :pdf)
+  #frame_inspection_table
+    - if show_settings?
+      = link_to "Create Frame Inspection", new_rbuilder_frame_inspection_url(@rbuilder)
+    %table.datatable{:cellpadding => 0, :border => 0, :cellspacing => 0}
+      %thead
+        %tr
+          %th Jobnumber
+          %th Address
+          %th Superintendent
+          %th Area Manager
+          %th Options
+      %tbody
+        - for fmi in @fminspections
+          %tr{:class => cycle('odd', 'even')}
+            %td= h(fmi.jobnumber)
+            %td= h(fmi.address)
+            %td= h(fmi.superintendent.full_name)
+            %td= h(fmi.areamanager.full_name)
+            %td
+              = link_to "Edit", edit_rbuilder_frame_inspection_url(@rbuilder, fmi)
+              |
+              = link_to "Delete", [@rbuilder, fmi], :method => :delete, :confirm => "Are you sure?"
+              |
+              = link_to "Print", rbuilder_frame_inspection_path(@rbuilder, fmi, :format => :pdf)
+
+  #superintendents_table
+    - if show_settings?
+      = link_to "Create Superintendent", new_rbuilder_superintendent_url(@rbuilder)
+    %table.datatable{:cellpadding => 0, :border => 0, :cellspacing => 0}
+      %thead
+        %tr
+          %th Username
+          %th Full Name
+          %th Logins
+          %th Inspections
+          %th Options
+      %tbody
+        - for sp in @superintendents
+          %tr{:class => cycle('odd', 'even')}
+            %td= h(sp.username)
+            %td= h sp.full_name
+            %td= h sp.login_count
+            %td= h sp.inspection_forms.count
+            %td
+              = link_to "Edit", edit_rbuilder_superintendent_url(@rbuilder, sp)
+
+  #am_table
+    - if show_settings?
+      = link_to "Create Area Manager", new_rbuilder_areamanager_url(@rbuilder)
+    %table.datatable{:cellpadding => 0, :border => 0, :cellspacing => 0}
+      %thead
+        %tr
+          %th Username
+          %th Full Name
+          %th Logins
+          %th Inspections
+          %th Options
+      %tbody
+        - for am in @areamanagers
+          %tr{:class => cycle('odd', 'even')}
+            %td= h(am.username)
+            %td= h am.full_name
+            %td= h am.login_count
+            %td= h am.inspection_forms.count
+            %td
+              = link_to "Edit", edit_rbuilder_areamanager_url(@rbuilder, am)
+

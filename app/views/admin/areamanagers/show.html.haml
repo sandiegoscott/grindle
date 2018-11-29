@@ -1,0 +1,51 @@
+- title "Areamanager"
+
+%p
+  %strong Username:
+  =h @areamanager.username
+%p
+  %strong First Name:
+  =h @areamanager.first_name
+%p
+  %strong Last Name:
+  =h @areamanager.last_name
+%p
+  %strong Email:
+  =h @areamanager.email
+%p
+  %strong Crypted Password:
+  =h @areamanager.crypted_password
+%p
+  %strong Password Salt:
+  =h @areamanager.password_salt
+%p
+  %strong Type:
+  =h @areamanager.type
+%p
+  %strong Inactive:
+  =h @areamanager.inactive
+%p
+  %strong Persistence Token:
+  =h @areamanager.persistence_token
+%p
+  %strong Login Count:
+  =h @areamanager.login_count
+%p
+  %strong Failed Login Count:
+  =h @areamanager.failed_login_count
+%p
+  %strong Last Login At:
+  =h @areamanager.last_login_at
+%p
+  %strong Current Login At:
+  =h @areamanager.current_login_at
+%p
+  %strong Builder:
+  =h @areamanager.builder_id
+
+%p
+  = link_to "Edit", edit_areamanager_path(@areamanager)
+  |
+  = link_to "Destroy", @areamanager, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", areamanagers_path

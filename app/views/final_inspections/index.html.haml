@@ -1,0 +1,64 @@
+- title "Final Inspections"
+
+.block
+  .content
+    .blockhead
+      %h2.side=h @title
+      %h4.side
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        - if show_settings?
+          = link_to "New Final Inspection", new_final_inspection_path
+          - if @rbuilder.first_name.include? 'Demonstration'
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            = link_to "Reassign Demo Dates", reassign_final_path
+    - form_for @search do |f|
+      %p{:style => "margin-left:20px;"}
+        Search by
+        = f.label :address_like, "Address:"
+        = f.text_field :address_like
+        &nbsp; and/or &nbsp;
+        = f.label :jobnumber_like, "Job Number:"
+        = f.text_field :jobnumber_like, :size => "20"
+        = f.submit "Search", :style => "margin:0 20px;"
+        = link_to "View All", final_inspections_path(:rbuilder_id => @rbuilder)
+
+    .inner
+      %table.table.datatable
+        %thead
+          %tr
+            %th Date
+            %th Address
+            %th Jobnumber
+            %th Status
+            %th Subdivision
+            %th Superintendent
+            - if current_user.is_admin? || current_user.is_inspector?
+              %th{:style => "width:19%;"} Options
+            -else
+              %th Options
+        %tbody
+          - for final_inspection in @final_inspections
+            %tr
+              %td= h final_inspection.idate.strftime('%b %d %Y')
+              %td= h final_inspection.address
+              %td= h final_inspection.jobnumber
+              %td= h final_inspection.status
+              %td= h final_inspection.subdivision.name
+              %td= h final_inspection.superintendent.full_name
+              %td
+                = link_to 'View', final_inspection_path(final_inspection)
+                - if current_user.is_admin? || current_user.is_inspector?
+                  |
+                  = link_to "Edit", edit_final_inspection_path(final_inspection)
+                  |
+                  = link_to "Delete", final_inspection, :method => :delete, :confirm => "Are you sure?"
+                |
+                = link_to "Print", final_inspection_path(final_inspection, :format => :pdf)
+  #pagination
+    .pagination_info
+      = page_entries_info @final_inspections
+    .pagination_links
+      = will_paginate @final_inspections
+
+  .clear
+

@@ -1,0 +1,15 @@
+- title "Error"
+
+.block
+  .content
+    .blockhead
+      %h2
+        Error
+    .inner
+      Please copy the text below and send to scott@railsrescue.com
+      %br
+      %br
+      - @errormsgs.each do |errormsg|
+        = errormsg
+        %br
+        %br

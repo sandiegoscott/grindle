@@ -1,0 +1,51 @@
+- title "Inspector"
+
+%p
+  %strong Username:
+  =h @inspector.username
+%p
+  %strong First Name:
+  =h @inspector.first_name
+%p
+  %strong Last Name:
+  =h @inspector.last_name
+%p
+  %strong Email:
+  =h @inspector.email
+%p
+  %strong Crypted Password:
+  =h @inspector.crypted_password
+%p
+  %strong Password Salt:
+  =h @inspector.password_salt
+%p
+  %strong Type:
+  =h @inspector.type
+%p
+  %strong Inactive:
+  =h @inspector.inactive
+%p
+  %strong Persistence Token:
+  =h @inspector.persistence_token
+%p
+  %strong Login Count:
+  =h @inspector.login_count
+%p
+  %strong Failed Login Count:
+  =h @inspector.failed_login_count
+%p
+  %strong Last Login At:
+  =h @inspector.last_login_at
+%p
+  %strong Current Login At:
+  =h @inspector.current_login_at
+%p
+  %strong Builder:
+  /=h @inspector.builder_id
+
+%p
+  = link_to "Edit", edit_inspector_path(@inspector)
+  |
+  = link_to "Destroy", @inspector, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", inspectors_path

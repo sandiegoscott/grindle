@@ -1,0 +1,23 @@
+- if @final_inspection.is_drhorton?
+  %table.table.fields
+    %tr
+      %td{:style => "width:20%;"}
+        Subcontractor:
+        = f.select(:category_id, Category.find(:all, :order => 'abbrev').collect { |c| [c.abbrev, c.id]})
+      %td{:style => "width:20%;"}
+        Status:
+        = f.select :status, (["Pending","Incomplete","Complete"])
+      %td
+        Description:
+        %br
+        = f.text_area :name, :size => "70x6"
+        = remove_child_link "remove", f
+- else
+  %table.table.fields
+    %tr
+      %td{:style => "width:12%;"}
+        = f.select(:category_id, Category.find(:all, :order => 'abbrev').collect { |c| [c.abbrev, c.id]})
+      %td
+        = f.text_area :name, :size => "70x5"
+        = remove_child_link "remove", f
+

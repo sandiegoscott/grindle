@@ -1,0 +1,128 @@
+.block
+  .content
+    .blockhead
+      %h2= @title
+    .inner
+      - form_for @final_inspection do |f|
+        = f.error_messages
+        #site_information
+          %table.table
+            %thead
+              %tr
+                %th{:style => "width:30%;"} Customer Information
+                %th{:style => "width:40%;"}
+                %th
+            %tbody
+              %tr
+                %td{:style => "padding-top:10px;"}
+                  = f.label "Date:"
+                  %br
+                  = f.date_select :idate
+                %td{:style => "padding-top:10px;"}
+                  = f.label "Subdivision:"
+                  %br
+                  = f.select :subdivision_id, @subs.map{ |sd| [sd.name, sd.id]}
+                  - if params[:action].include? 'new'
+                    = link_to "Show All Subdivisions", new_all_subs_punchlists_path
+                %td
+                  = "Job #: "+("&nbsp;"*21)+" Status:"
+                  %br
+                  = f.text_field :jobnumber, :style => "width:125px;"
+                  &nbsp;
+                  = f.select :status, (["Pending","Incomplete","Complete"])
+
+              %tr
+                %td
+                  Customer Name:
+                  %br
+                  = f.text_field :name, :style => "width:250px;"
+                %td
+                  Address:
+                  %br
+                  = f.text_field :address, :style => "width:350px;"
+                %td
+                  = f.label "City:"
+                  %br
+                  = f.text_field :city, :style => "width:180px;"
+                  = f.label "State:"
+                  = f.select :state, get_states
+
+              - if @final_inspection.is_drhorton?
+                %tr
+                  %td
+                    = f.label "Telephone:"
+                    %br
+                    = f.text_field :phone
+                  %td{ :style => "padding-top:5px;"}
+                    = f.label "His phone:"
+                    %br
+                    = f.text_field :his_phone
+                  %td
+                    = f.label "Her phone:"
+                    %br
+                    = f.text_field :her_phone
+
+              %tr
+                %td
+                  = f.label "Area Manager:"
+                  %br
+                  = f.select :areamanger_id, @ams.map{ |a| [a.full_name, a.id]}
+                %td{:style => "padding-top:10px;"}
+                  = f.label "Superintendent:"
+                  %br
+                  = f.select :superintendent_id, @supers.map{ |s| [s.full_name, s.id]}
+                %td
+                  = f.label "Inspector:"
+                  %br
+                  = f.select :inspector_id, @inspectors.map{ |i| [i.full_name, i.id]}
+
+        - if @final_inspection.is_drhorton?
+          #items
+            %table.table
+              %thead
+                %tr
+                  %th{:style => "width:1%;"}
+                  %th{:style => "width:60%;"}
+                    Items
+              %tbody
+                - FinalInspection::CHECKS.each_pair do |key, value|
+                  %tr
+                    %td= f.check_box key
+                    %td= FinalInspection::LETTERS[key] + '. ' + value
+        -else
+          = render :partial => 'checklist', :locals => { :f => f }
+
+        #defects
+          %table.table
+            %thead
+              %tr
+                - if @final_inspection.is_drhorton?
+                  %th{:style => "width:20%;"} Trade
+                  %th{:style => "width:20%;"} Status
+                  %th Item
+                - else
+                  %th{:style => "width:12%;"} Trade
+                  %th Defect
+          - f.fields_for :defects do |defect_form|
+            = render :partial => 'defect', :locals => { :f => defect_form }
+          = new_child_fields_template(f, :defects)
+          %p
+            = add_child_link "New Defect", :defects
+
+        - unless @final_inspection.is_drhorton?
+          #comments
+            %table.table
+              %thead
+                %tr
+                  %th{:style => "width:10%;"} Comments
+                  %th
+            - f.fields_for :comments do |comment_form|
+              = render :partial => 'comment', :locals => { :f => comment_form }
+            = new_child_fields_template(f, :comments)
+            %p
+              = add_child_link "New Comment", :comments
+
+        .clear
+        %p
+          = f.submit "Submit"
+

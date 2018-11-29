@@ -1,0 +1,13 @@
+- title "Inspection Forms"
+
+%table
+  %tr
+    %th Name
+  - for inspection_form in @inspection_forms
+    %tr
+      %td= h inspection_form.name
+      %td= link_to 'Show', inspection_form
+      %td= link_to 'Edit', edit_inspection_form_path(inspection_form)
+      %td= link_to 'Destroy', inspection_form, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Inspection Form", new_inspection_form_path

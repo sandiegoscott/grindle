@@ -1,0 +1,37 @@
+- title "Superintendents"
+
+.block
+  .secondary-navigation
+    = render :partial => 'shared/admin_nav'
+  .content
+    .blockhead
+      %h2.side Superintendents :
+      %h4.side
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        - if show_settings?
+          = link_to "New Superintendent", new_superintendent_path
+    .inner
+      %table.table
+        %thead
+          %tr
+            %th Username
+            %th Name
+            %th Email
+            %th Inactive
+            %th Builder
+            %th Logins
+            %th Options
+        %tbody
+          - for superintendent in @superintendents
+            %tr
+              %td= h superintendent.username
+              %td= h superintendent.full_name
+              %td= h superintendent.email
+              %td= h superintendent.inactive
+              %td= h superintendent.rbuilder ? superintendent.rbuilder.full_name : '--'
+              %td= h superintendent.login_count
+              %td
+                = link_to 'Edit', edit_superintendent_path(superintendent)
+                |
+                = link_to 'Destroy', superintendent, :confirm => 'Are you sure?', :method => :delete
+

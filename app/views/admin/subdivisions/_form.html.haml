@@ -1,0 +1,14 @@
+- form_for @subdivision do |f|
+  = f.error_messages
+  %table.table
+    %thead
+      %tr
+        %th{:style => "width:25%;"} Name
+        %th
+    %tbody
+      %tr
+        %td
+          = f.text_field :name
+        %td
+          = f.submit "Submit"
+

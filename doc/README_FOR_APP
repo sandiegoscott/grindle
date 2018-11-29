@@ -1,0 +1,8 @@
+Use this README file to introduce your application and point to useful places in the API for learning more.
+Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+
+https://makandracards.com/railslts/47191-rubygems-2-x-support-for-rails-2-3-lts
+
+https://makandracards.com/railslts/36561-installing-rails-2-3-lts-with-bundler
+
+https://www.google.com/search?q=%22add_frozen_gem_path%27%3A+undefined+method+%60source_index%27%22&oq=%22add_frozen_gem_path%27%3A+undefined+method+%60source_index%27%22&aqs=chrome..69i57.2144j0j1&sourceid=chrome&ie=UTF-8

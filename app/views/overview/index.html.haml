@@ -1,0 +1,28 @@
+- title "Overview"
+
+.block
+  .content
+    - if show_settings?
+      .blockhead
+        %h2
+          - if @rbuilder
+            = "#{@rbuilder.full_name} : Admin"
+          - else
+            Admin : Choose Builder
+      .inner
+        #listnav
+          %ul.navigation.list
+            - @rbuilders.each do |builder|
+              %li
+                = link_to builder.full_name, overview_path(builder.id)
+    - else
+      .blockhead
+        %h2
+          = current_user.full_name
+      .inner
+        You currently have
+        = link_to h("#{current_user.final_inspections.length} Final Inspections"), final_inspections_url
+        and
+        = link_to h("#{current_user.frame_inspections.length} Frame Inspections"), frame_inspections_url
+        in our databases.
+

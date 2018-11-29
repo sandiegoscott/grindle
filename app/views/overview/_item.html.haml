@@ -1,0 +1,8 @@
+%table.table.fields
+  %tr
+    %td{:style => "width:10%;"}
+      = f.select(:category_id, Category.find(:all, :order => 'abbrev').collect { |c| [c.abbrev, c.id]})
+    %td
+      = f.text_area :name, :size => "21x5"
+      = remove_child_link "remove", f
+
